@@ -1,0 +1,61 @@
+# 🐉 DarkLugia: Ultimate Cardputer-Adv Suite
+
+![DarkLugia Splash](assets/splash.png)
+
+**DarkLugia** is a custom firmware extension for the **Bruce** ecosystem, specifically optimized for the **M5Stack Cardputer-Adv**. It combines high-end RF tools, credential harvesting, and a stealth-focused UI inspired by the "Sea Glass" and "Shadow Lugia" aesthetic.
+
+---
+
+## 🚀 Core Features
+
+### 🚗 Kia Optima (2010-2011) Pre-load
+Custom Sub-GHz script hardcoded for the **315MHz / Keeloq** protocol. 
+* **One-Click Capture:** Instantly tunes the CC1101 to the correct frequency and modulation (OOK650).
+* **Auto-Save:** Captures rolling codes and logs them to `/DarkLugia/subghz/` for later replay/analysis.
+
+### 💳 Hybrid Card Cloner
+A dual-frequency module designed for rapid entry-point testing.
+* **NFC (13.56MHz):** Clones Mifare and NTAG UID data.
+* **RFID (125kHz):** Targeted cloning for legacy building fobs.
+* **Door Decrypt:** Integrated **MFKey32** sniffing and nested attacks for encrypted door knobs.
+
+### 🛜 Evil Portal: Xfinity & Router Suite
+Social engineering portals designed for mobile-responsive credential harvesting.
+* **Xfinity Template:** High-fidelity clone for "xfinitywifi" hotspots.
+* **Router Firmware Update:** Generic portal for WPA/WPA2 key capture via "Critical Update" prompts.
+
+### 🌑 Stealth & Feedback
+* **Stealth Mode [ON]:** Global toggle that kills all RGB LEDs, sets screen brightness to 1%, and mutes audio.
+* **Lugia Roar:** Custom audio feedback (`roar.wav`) plays upon successful capture (when Stealth is OFF).
+
+---
+
+## 📂 Installation
+
+1. **Prerequisites:** Flash the latest [Bruce Firmware](https://github.com/pr3y/Bruce) to your Cardputer.
+2. **Directory Setup:** - Create a folder named `DarkLugia` on your SD Card.
+   - Copy the contents of this repo into that folder.
+3. **Assets:** - Place your `roar.wav` in `/DarkLugia/assets/`.
+   - Place `splash.png` (240x135) in `/DarkLugia/assets/`.
+4. **Boot:** Run `boot_lugia.py` from the Bruce File Browser or set it as the startup script.
+
+---
+
+## 🛠️ Usage
+
+| Tool | Menu Path | Hardware Required |
+| :--- | :--- | :--- |
+| **Kia Unlock** | `Main Menu > Kia Fob` | CC1101 (Internal) |
+| **Cloner** | `Main Menu > Card Cloner` | PN532 / RDM6300 |
+| **Phishing** | `WiFi > Xfinity Portal` | ESP32 (Internal) |
+| **Stealth** | `System > Stealth Mode` | N/A |
+
+---
+
+## ⚠️ Disclaimer
+This software is for **educational purposes and authorized penetration testing only**. Unauthorized access to vehicles or networks is illegal. The author takes no responsibility for misuse of this toolkit.
+
+---
+
+**Developed with 💚 by [Your GitHub Username]**
+
