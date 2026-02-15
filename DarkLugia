@@ -1,0 +1,67 @@
+@echo off
+setlocal enabledelayedexpansion
+
+echo ==========================================
+echo    DARKLUGIA: BRUCE SUITE INSTALLER
+echo ==========================================
+echo Creating directory structure...
+
+mkdir DarkLugia
+mkdir DarkLugia\scripts
+mkdir DarkLugia\subghz
+mkdir DarkLugia\portals
+mkdir DarkLugia\portals\Xfinity
+mkdir DarkLugia\assets
+mkdir DarkLugia\logs
+mkdir DarkLugia\nfc
+
+echo Generating Menu Configuration...
+(
+echo [
+echo   { "label": "Kia Fob", "action": "run_script", "path": "/DarkLugia/scripts/kia_auto.js" },
+echo   { "label": "Card Cloner", "action": "run_script", "path": "/DarkLugia/scripts/cloner_auto.js" },
+echo   { "label": "Door Decrypt", "action": "run_script", "path": "/DarkLugia/scripts/door_decrypt.js" },
+echo   { "label": "Xfinity Portal", "action": "run_script", "path": "/DarkLugia/scripts/xfinity_auto.js" },
+echo   { "label": "STEALTH MODE", "action": "toggle_variable", "variable": "global.stealth_mode" }
+echo ]
+) > DarkLugia\menu_config.json
+
+echo Generating Kia 315MHz Script...
+(
+echo subghz.stop();
+echo subghz.set_frequency(315000000);
+echo subghz.set_preset("Ook650Async");
+echo display.clear();
+echo display.set_text_color(0x78B3A3);
+echo display.print("DARKLUGIA: KIA 315MHz");
+echo while (true) {
+echo     if (subghz.receive()) {
+echo         storage.save("/DarkLugia/subghz/Kia_" + system.get_time() + ".sub", subghz.get_data());
+echo         if (!global.stealth_mode) audio.play("/DarkLugia/assets/roar.wav");
+echo         break;
+echo     }
+echo     if (keyboard.is_pressed(KEY_BACK)) break;
+echo }
+) > DarkLugia\scripts\kia_auto.js
+
+echo Generating Xfinity Portal...
+(
+echo ^<html^>^<body style="background:#f2f2f2; font-family:sans-serif; text-align:center;"^>
+echo ^<div style="background:white; padding:20px; border-radius:10px; margin-top:50px;"^>
+echo ^<h2 style="color:#6a1b9a;"^>Xfinity Authentication^</h2^>
+echo ^<p^>Firmware Update Required^</p^>
+echo ^<form action="/login" method="POST"^>
+echo ^<input type="text" name="user" placeholder="Email" style="width:80%%; padding:10px; margin:5px;"^>^<br^>
+echo ^<input type="password" name="pass" placeholder="Password" style="width:80%%; padding:10px; margin:5px;"^>^<br^>
+echo ^<button type="submit" style="background:#6a1b9a; color:white; padding:10px 20px;"^>Connect^</button^>
+echo ^</form^>^</div^>^</body^>^</html^>
+) > DarkLugia\portals\Xfinity\index.html
+
+echo.
+echo ==========================================
+echo SETUP COMPLETE!
+echo.
+echo 1. Move the 'DarkLugia' folder to your Cardputer SD Card.
+echo 2. DONT FORGET: Add your 'roar.wav' to DarkLugia/assets/
+echo ==========================================
+pause
