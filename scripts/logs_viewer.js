@@ -1,4 +1,12 @@
+const path = require("path");
+const BASE_DIR = path.resolve(__dirname, "..");
+
 display.clear();
 display.print("--- DARKLUGIA PASSWORDS ---");
-let logs = storage.read("/DarkLugia/logs/passwords.txt");
-display.print(logs);
+const logsPath = path.join(BASE_DIR, "DarkLugia", "logs", "passwords.txt");
+if (storage.exists(logsPath)) {
+    const logs = storage.read(logsPath);
+    display.print(logs);
+} else {
+    display.print("No credentials captured yet.");
+}
